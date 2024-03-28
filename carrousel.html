@@ -6,38 +6,148 @@
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 		<link href="assets/styles.css" rel="stylesheet">
 		<style>
-			/* Schrijf hier gewoon je CSS voor dit component */
+/* Schrijf hier gewoon je CSS voor dit component */
 
-			/* Hint: welk layout model is handig om content naast elkaar te zetten? */
+.carousel-container {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item {
+  flex: 0 0 50%; 
+  height: 200px; 
+  text-align: center; 
+}
+
+/* Dit zorgt dat de tekst in het carousel in het midden komt te staan */
+.carousel-item blockquote {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100%; 
+}
+
+/* Dit geeft per item een andere kleur */
+.carousel-item:nth-child(1) {
+  background-color: var(--purple);
+}
+
+.carousel-item:nth-child(2) {
+  background-color: var(--green);
+}
+
+.carousel-item:nth-child(3) {
+  background-color: var(--yellow);
+}
+
+.carousel-item:nth-child(4) {
+  background-color: var(--purple);
+}
+
+.carousel-item:nth-child(5) {
+  background-color: var(--green);
+}
+
+.carousel-item:nth-child(6) {
+  background-color: var(--yellow);
+}
+
+/* Hint: welk layout model is handig om content naast elkaar te zetten? */
 		</style>
 		<script type="module">
-			/* Schrijf hier eventueel je client-side JavaScript */
+
+/* Schrijf hier eventueel je client-side JavaScript */
+
+// Wacht tot het DOM geladen is voordat de code wordt uitgevoerd
+document.addEventListener("DOMContentLoaded", function() {
+  // Hier selecteer ik het element met de class 'carousel-container'
+  const carouselContainer = document.querySelector('.carousel-container');
+  // Selecteert alle elementen met de class 'carousel-item' en sla ze op in een array
+  const carouselItems = document.querySelectorAll('.carousel-item');
+  // Bepaalt het totale aantal items in de carousel
+  const totalItems = carouselItems.length;
+  let currentIndex = 0;
+
+  // Dit zorgt ervoor dat de carousel van links naar rechts beweegt
+  function showItem(index) {
+    const itemWidth = carouselItems[0].offsetWidth;
+    carouselContainer.style.transform = `translateX(${-index * itemWidth}px)`;
+  }
+
+  // Dit wordt gebruikt om het juiste item in de carrousel weer te geven hoe het staat in index
+  function nextItem() {
+    currentIndex = (currentIndex + 1) % totalItems;
+    showItem(currentIndex);
+  }
+
+  // Dit wordt gebruikt om naar het vorige item in de carrousel te gaan
+  function prevItem() {
+    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+    showItem(currentIndex);
+  }
+
+  // Stelt een interval in om automatisch naar de volgende te gaan
+  setInterval(nextItem, 2000); // 2 seconde
+
+  // Selecteer de knoppen voor 'Vorige' en 'Volgende' en voegt event listeners toe
+  const prevButton = document.querySelector('.prev-button');
+  const nextButton = document.querySelector('.next-button');
+
+  prevButton.addEventListener('click', prevItem);
+  nextButton.addEventListener('click', nextItem);
+});
+
+/* Content */
 		</script>
 	</head>
 	<body>
 		<h1>Carrousel</h1>
 
-		<!-- Content
+		<section class="carousel">
+			<div class="carousel-container">
+			  <article class="carousel-item">
+				<blockquote>“Websites leren bouwen, én praktijkervaring opdoen?”</blockquote>
+			  </article>
+		
+			  <article class="carousel-item">
+				<blockquote>“FDND is de enige HBO-opleiding voor Frontend Development in Nederland, in twee jaar stomen wij jou klaar voor het werkveld”</blockquote>
+			  </article>
+		
+			  <article class="carousel-item">
+				<blockquote>“Je werkt bij ons aan échte projecten voor échte opdrachtgevers”</blockquote>
+			  </article>
+		
+			  <article class="carousel-item">
+				<blockquote>“In het studiomodel werken studenten onder begeleiding van coaches en experts uit het vakgebied aan praktijkgerichte opdrachten”</blockquote>
+			  </article>
+		
+			  <article class="carousel-item">
+				<blockquote>“Bij FDND leer je websites bouwen en andere belangrijke skills die jij in de praktijk toe kan passen”</blockquote>
+			  </article>
+		
+			  <article class="carousel-item">
+				<blockquote>“Een Associate degree-opleiding is een tweejarige hbo-opleiding op niveau 5”</blockquote>
+			  </article>
 
-		“Websites leren bouwen, én praktijkervaring opdoen?”
+			</div>
 
-		“FDND is de enige HBO-opleiding voor Frontend Development in Nederland, in twee jaar stomen wij jou klaar voor het werkveld”
+			<!--Button-->
+			<button class="prev-button">Vorige</button>
+    		<button class="next-button">Volgende</button>
 
-		“Je werkt bij ons aan échte projecten voor échte opdrachtgevers”
-
-		“In het studiomodel werken studenten onder begeleiding van coaches en experts uit het vakgebied aan praktijkgerichte opdrachten”
-
-		“Bij FDND leer je websites bouwen en andere belangrijke skills die jij in de praktijk toe kan passen”
-
-		“Een Associate degree-opleiding is een tweejarige hbo-opleiding op niveau 5”
-
-		-->
-
-		<details open>
+		  </section>
+		
+		  <script src="script.js"></script>
+		</body>
+		</html>
+		
+		<!-- <details open>
 			<summary>Demo video</summary>
 			<video src="assets/carrousel.mp4" width="1298" height="469" controls muted autoplay loop>
 				<a href="assets/carrousel.mp4">assets/carrousel.mp4</a>
 			</video>
-		</details>
+		</details> -->
 	</body>
 </html>
