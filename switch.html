@@ -8,14 +8,58 @@
 		<style>
 			/* Schrijf hier gewoon je CSS voor dit component */
 
-			/* Hint: Dit component kun je volledig met HTML en CSS bouwen */
+/* Geef indicator een positie op basis van checkbox status */
+.switch-input:checked + .switch-control::after {
+    transform: translateX(20px) translateY(-50%);
+/* Als de checkbox is ingeschakeld, verplaats de indicator naar rechts */
+}
 
-			/* Hint: Hoe ver ga je qua styling? Vraag jezelf dit altijd af */
+	/* Hint: Dit component kun je volledig met HTML en CSS bouwen */
+
+	/* Hint: Hoe ver ga je qua styling? Vraag jezelf dit altijd af */
+
+/* Dit verbergt de standaard checkbox */
+.switch-input {
+    display: none;
+}
+
+/* Stijl switch control label */
+.switch-control {
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: #66E5BF;;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Stijl indicator voor switch control */
+.switch-control::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    top: 50%;
+	left: 4px;
+    transform: translateY(-50%);
+	transition: transform 0.2s ease;
+}
+
 		</style>
 	</head>
 	<body>
-		<h1>Switch control</h1>
-		
+
+<!--Content-->
+
+<h1>Switch control</h1>
+
+<input class="switch-input" id="theme-switch" type="checkbox">
+<label class="switch-control" for="theme-switch"></label>
+<div class="container"></div>
+
 		<!-- Hint: Op het WebKit blog stond hierover vorige maand een goed artikel -->
 
 		<details open>
